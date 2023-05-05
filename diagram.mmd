@@ -1,0 +1,311 @@
+classDiagram
+class ExamDrawer
+ExamDrawer : +build() Widget
+StatelessWidget <|-- ExamDrawer
+
+class NfcModalBottomSheet
+NfcModalBottomSheet : +build() Widget
+StatelessWidget <|-- NfcModalBottomSheet
+
+class SocialSecurityInputFormat
+SocialSecurityInputFormat : -_maxChars$ int
+SocialSecurityInputFormat : +formatEditUpdate() TextEditingValue
+TextInputFormatter <|-- SocialSecurityInputFormat
+
+class SsnInputModalBottomSheet
+SsnInputModalBottomSheet : -_formKey$ GlobalKey~FormState~
+SsnInputModalBottomSheet o-- GlobalKey~FormState~
+SsnInputModalBottomSheet : +build() Widget
+StatelessWidget <|-- SsnInputModalBottomSheet
+
+class Waiting
+Waiting : +build() Widget
+StatelessWidget <|-- Waiting
+
+class DefaultFirebaseOptions
+DefaultFirebaseOptions : +web$ FirebaseOptions
+DefaultFirebaseOptions o-- FirebaseOptions
+DefaultFirebaseOptions : +android$ FirebaseOptions
+DefaultFirebaseOptions o-- FirebaseOptions
+DefaultFirebaseOptions : +ios$ FirebaseOptions
+DefaultFirebaseOptions o-- FirebaseOptions
+DefaultFirebaseOptions : +macos$ FirebaseOptions
+DefaultFirebaseOptions o-- FirebaseOptions
+DefaultFirebaseOptions : +currentPlatform$ FirebaseOptions
+DefaultFirebaseOptions o-- FirebaseOptions
+
+class MyApp
+MyApp : +build() Widget
+StatelessWidget <|-- MyApp
+
+class Department
+Department : +id int
+Department : +title String
+Department : +users List~User~
+Department : +patients List~Patient~
+Department : +toJson() Map<String, dynamic>
+
+class LoginDTO
+LoginDTO : +token String
+LoginDTO : +user User
+LoginDTO o-- User
+
+class PatientJournalWriteDTO
+PatientJournalWriteDTO : +description String
+PatientJournalWriteDTO : +patientId int
+PatientJournalWriteDTO : +toJson() Map<String, dynamic>
+
+class PatientTodoWriteDTO
+PatientTodoWriteDTO : +PatientMedicineModelId int
+PatientTodoWriteDTO : +UserModelId int
+PatientTodoWriteDTO : +Done bool
+PatientTodoWriteDTO : +PatientModelId int
+PatientTodoWriteDTO : +PlannedTimeAtDay DateTime
+PatientTodoWriteDTO : +toJson() Map<String, dynamic>
+
+class Hologram
+Hologram : +title String
+Hologram : +filepath String
+Hologram : +icon IconData
+Hologram o-- IconData
+Hologram : +toJson() Map<String, dynamic>
+
+class Medicine
+Medicine : +id int
+Medicine : +title String
+Medicine : +description String
+Medicine : +pricePrMg double
+Medicine : +activeSubstance String
+Medicine : +toJson() Map<String, dynamic>
+
+class Patient
+Patient : +id int
+Patient : +name String
+Patient : +socialSecurityNumber String
+Patient : +toJson() Map<String, dynamic>
+
+class PatientJournal
+PatientJournal : +id int
+PatientJournal : +description String
+PatientJournal : +createdAt DateTime
+PatientJournal : +toJson() Map<String, dynamic>
+
+class PatientMedicine
+PatientMedicine : +id int
+PatientMedicine : +patient Patient
+PatientMedicine o-- Patient
+PatientMedicine : +medicine Medicine
+PatientMedicine o-- Medicine
+PatientMedicine : +amount int
+PatientMedicine : +unit String
+PatientMedicine : +toJson() Map<String, dynamic>
+
+class PatientTodo
+PatientTodo : +id int
+PatientTodo : +patientMedicine PatientMedicine?
+PatientTodo o-- PatientMedicine
+PatientTodo : +done bool
+PatientTodo : +plannedTimeAtDay DateTime
+PatientTodo : +patientModelId int
+PatientTodo : +toJson() Map<String, dynamic>
+
+class User
+User : +id int
+User : +name String
+User : +email String
+User : +role String
+User : +jobTitle String
+User : +createdAt DateTime
+User : +updatedAt DateTime
+User : +departmentModelId int
+User : +toJson() Map<String, dynamic>
+
+class Api
+Api : +BASE_URL$ String
+Api : +defaultHeaders$ Map~String, String~
+Api : -_dio()$ Dio
+Api : +get()$ Future<dynamic>
+Api : +post()$ Future<Response<dynamic>?>
+Api : +put()$ Future<dynamic>
+
+class Auth
+Auth : -_storage$ FlutterSecureStorage
+Auth o-- FlutterSecureStorage
+Auth : +getToken()$ Future<String?>
+Auth : +setToken()$ Future<void>
+Auth : +removeToken()$ Future<void>
+
+class NfcScanner
+NfcScanner : +result String
+NfcScanner : +readNfcTag() Future<String>
+NfcScanner : +IsNFCAvailable() Future<bool>
+ChangeNotifier <|-- NfcScanner
+
+class PrivateRoute
+PrivateRoute : +next Widget
+PrivateRoute o-- Widget
+PrivateRoute : +build() Widget
+StatelessWidget <|-- PrivateRoute
+
+class DepartmentViewModel
+DepartmentViewModel : -_department Department?
+DepartmentViewModel o-- Department
+DepartmentViewModel : +department Department?
+DepartmentViewModel o-- Department
+DepartmentViewModel : +setDepartment() void
+DepartmentViewModel : +getDepartmentAsync() Future<Department?>
+ChangeNotifier <|-- DepartmentViewModel
+
+class HologramsViewModel
+HologramsViewModel : -_holograms List~Hologram~
+HologramsViewModel : +holograms List~Hologram~
+HologramsViewModel : +addHologram() void
+HologramsViewModel : +getHologram() Hologram?
+
+class MedicineViewModel
+MedicineViewModel : -_medicins List~Medicine~
+MedicineViewModel : +medicins List~Medicine~
+MedicineViewModel : +getMedicinsAsync() Future<List<Medicine>>
+ChangeNotifier <|-- MedicineViewModel
+
+class PatientJournalViewModel
+PatientJournalViewModel : -_patientJournals List~PatientJournal~
+PatientJournalViewModel : +patientJournals List~PatientJournal~
+PatientJournalViewModel : +fetchPatientJournalsAsync() Future<List<PatientJournal>>
+PatientJournalViewModel : +createPatientJournalAsync() Future<PatientJournal?>
+ChangeNotifier <|-- PatientJournalViewModel
+
+class PatientMedicinesViewModel
+PatientMedicinesViewModel : -_patientMedicines List~PatientMedicine~
+PatientMedicinesViewModel : +patientMedicines List~PatientMedicine~
+PatientMedicinesViewModel : +setPatientMedicines() void
+PatientMedicinesViewModel : +fetchPatientMedicinesAsync() Future<List<PatientMedicine>>
+ChangeNotifier <|-- PatientMedicinesViewModel
+
+class PatientTodoViewModel
+PatientTodoViewModel : -_patientTodos List~PatientTodo~
+PatientTodoViewModel : +patientTodos List~PatientTodo~
+PatientTodoViewModel : +setPatientTodos() void
+PatientTodoViewModel : +fetchPatientTodosAsync() Future<List<PatientTodo>>
+PatientTodoViewModel : +updatePatientTodoAsync() Future<List<PatientTodo>>
+ChangeNotifier <|-- PatientTodoViewModel
+
+class PatientViewModel
+PatientViewModel : -_patient Patient?
+PatientViewModel o-- Patient
+PatientViewModel : +patient Patient?
+PatientViewModel o-- Patient
+PatientViewModel : +setPatient() void
+PatientViewModel : +getPatientBySsnAsync() Future<Patient?>
+ChangeNotifier <|-- PatientViewModel
+
+class UserViewModel
+UserViewModel : -_user User?
+UserViewModel o-- User
+UserViewModel : +user User?
+UserViewModel o-- User
+UserViewModel : +setUser() void
+UserViewModel : +getUserAsync() Future<User?>
+ChangeNotifier <|-- UserViewModel
+
+class DepartmentView
+DepartmentView : +build() Widget
+StatelessWidget <|-- DepartmentView
+
+class FrontpageView
+FrontpageView : +build() Widget
+StatelessWidget <|-- FrontpageView
+
+class HologramsView
+HologramsView : +build() Widget
+StatelessWidget <|-- HologramsView
+
+class HologramView
+HologramView : +hologram Hologram
+HologramView o-- Hologram
+HologramView : +build() Widget
+StatelessWidget <|-- HologramView
+
+class LayoutView
+LayoutView : +child Widget
+LayoutView o-- Widget
+LayoutView : +build() Widget
+StatelessWidget <|-- LayoutView
+
+class LoginPage
+LoginPage : +next String?
+LoginPage : +createState() State<LoginPage>
+StatefulWidget <|-- LoginPage
+
+class _LoginPageState
+_LoginPageState : -_showPassword bool
+_LoginPageState : -_clickShowPassword() void
+_LoginPageState : +build() Widget
+State <|-- _LoginPageState
+
+class MedicineView
+MedicineView : +build() Widget
+StatelessWidget <|-- MedicineView
+
+class NfcViewAnimation
+NfcViewAnimation : +createState() State<NfcViewAnimation>
+StatefulWidget <|-- NfcViewAnimation
+
+class _NfcViewAnimationState
+_NfcViewAnimationState : -_controller AnimationController
+_NfcViewAnimationState o-- AnimationController
+_NfcViewAnimationState : +initState() void
+_NfcViewAnimationState : +dispose() void
+_NfcViewAnimationState : +build() Widget
+State <|-- _NfcViewAnimationState
+SingleTickerProviderStateMixin <|-- _NfcViewAnimationState
+
+class PatientJournalView
+PatientJournalView : +build() Widget
+StatelessWidget <|-- PatientJournalView
+
+class PatientMedicineView
+PatientMedicineView : +patientId int
+PatientMedicineView : +build() Widget
+StatelessWidget <|-- PatientMedicineView
+
+class PatientTodoView
+PatientTodoView : +build() Widget
+StatelessWidget <|-- PatientTodoView
+
+class PatientView
+PatientView : +createState() State<PatientView>
+StatefulWidget <|-- PatientView
+
+class _PatientViewState
+_PatientViewState : -_tabController TabController
+_PatientViewState o-- TabController
+_PatientViewState : +initState() void
+_PatientViewState : +build() Widget
+State <|-- _PatientViewState
+SingleTickerProviderStateMixin <|-- _PatientViewState
+
+class QrScanView
+QrScanView : +createState() State<QrScanView>
+StatefulWidget <|-- QrScanView
+
+class _QrScanViewState
+_QrScanViewState : +qrKey GlobalKey~State~StatefulWidget~~
+_QrScanViewState : +controller QRViewController?
+_QrScanViewState o-- QRViewController
+_QrScanViewState : +result Barcode?
+_QrScanViewState o-- Barcode
+_QrScanViewState : +subscription Stream~Barcode~?
+_QrScanViewState o-- Stream~Barcode~
+_QrScanViewState : -_onQRViewCreated() void
+_QrScanViewState : +dispose() void
+_QrScanViewState : +build() Widget
+State <|-- _QrScanViewState
+
+class ScanView
+ScanView : +build() Widget
+StatelessWidget <|-- ScanView
+
+class SettingsView
+SettingsView : +build() Widget
+StatelessWidget <|-- SettingsView

@@ -1,0 +1,399 @@
+@startuml
+set namespaceSeparator ::
+
+class "exam_app::components::drawer.dart::ExamDrawer" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::components::drawer.dart::ExamDrawer"
+
+class "exam_app::components::nfc_modal_bottom_sheet.dart::NfcModalBottomSheet" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::components::nfc_modal_bottom_sheet.dart::NfcModalBottomSheet"
+
+class "exam_app::components::social_security_input_format.dart::SocialSecurityInputFormat" {
+  {static} -int _maxChars
+  +TextEditingValue formatEditUpdate()
+}
+
+"flutter::src::services::text_formatter.dart::TextInputFormatter" <|-- "exam_app::components::social_security_input_format.dart::SocialSecurityInputFormat"
+
+class "exam_app::components::ssn_input_modal_bottom_sheet.dart::SsnInputModalBottomSheet" {
+  {static} -GlobalKey<FormState> _formKey
+  +Widget build()
+}
+
+"exam_app::components::ssn_input_modal_bottom_sheet.dart::SsnInputModalBottomSheet" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::components::ssn_input_modal_bottom_sheet.dart::SsnInputModalBottomSheet"
+
+class "exam_app::components::waiting.dart::Waiting" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::components::waiting.dart::Waiting"
+
+class "exam_app::firebase_options.dart::DefaultFirebaseOptions" {
+  {static} +FirebaseOptions web
+  {static} +FirebaseOptions android
+  {static} +FirebaseOptions ios
+  {static} +FirebaseOptions macos
+  {static} +FirebaseOptions currentPlatform
+}
+
+"exam_app::firebase_options.dart::DefaultFirebaseOptions" o-- "firebase_core_platform_interface::firebase_core_platform_interface.dart::FirebaseOptions"
+
+class "exam_app::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::main.dart::MyApp"
+
+class "exam_app::models::department.dart::Department" {
+  +int id
+  +String title
+  +List<User> users
+  +List<Patient> patients
+  +Map<String, dynamic> toJson()
+}
+
+class "exam_app::models::dto::LoginDTO.dart::LoginDTO" {
+  +String token
+  +User user
+}
+
+"exam_app::models::dto::LoginDTO.dart::LoginDTO" o-- "exam_app::models::user.dart::User"
+
+class "exam_app::models::dto::patient_journal_write_dto.dart::PatientJournalWriteDTO" {
+  +String description
+  +int patientId
+  +Map<String, dynamic> toJson()
+}
+
+class "exam_app::models::dto::patient_todo_write_dto.dart::PatientTodoWriteDTO" {
+  +int PatientMedicineModelId
+  +int UserModelId
+  +bool Done
+  +int PatientModelId
+  +DateTime PlannedTimeAtDay
+  +Map<String, dynamic> toJson()
+}
+
+class "exam_app::models::hologram.dart::Hologram" {
+  +String title
+  +String filepath
+  +IconData icon
+  +Map<String, dynamic> toJson()
+}
+
+"exam_app::models::hologram.dart::Hologram" o-- "flutter::src::widgets::icon_data.dart::IconData"
+
+class "exam_app::models::medicine.dart::Medicine" {
+  +int id
+  +String title
+  +String description
+  +double pricePrMg
+  +String activeSubstance
+  +Map<String, dynamic> toJson()
+}
+
+class "exam_app::models::patient.dart::Patient" {
+  +int id
+  +String name
+  +String socialSecurityNumber
+  +Map<String, dynamic> toJson()
+}
+
+class "exam_app::models::patient_journal.dart::PatientJournal" {
+  +int id
+  +String description
+  +DateTime createdAt
+  +Map<String, dynamic> toJson()
+}
+
+class "exam_app::models::patient_medicine.dart::PatientMedicine" {
+  +int id
+  +Patient patient
+  +Medicine medicine
+  +int amount
+  +String unit
+  +Map<String, dynamic> toJson()
+}
+
+"exam_app::models::patient_medicine.dart::PatientMedicine" o-- "exam_app::models::patient.dart::Patient"
+"exam_app::models::patient_medicine.dart::PatientMedicine" o-- "exam_app::models::medicine.dart::Medicine"
+
+class "exam_app::models::patient_todo.dart::PatientTodo" {
+  +int id
+  +PatientMedicine? patientMedicine
+  +bool done
+  +DateTime plannedTimeAtDay
+  +int patientModelId
+  +Map<String, dynamic> toJson()
+}
+
+"exam_app::models::patient_todo.dart::PatientTodo" o-- "exam_app::models::patient_medicine.dart::PatientMedicine"
+
+class "exam_app::models::user.dart::User" {
+  +int id
+  +String name
+  +String email
+  +String role
+  +String jobTitle
+  +DateTime createdAt
+  +DateTime updatedAt
+  +int departmentModelId
+  +Map<String, dynamic> toJson()
+}
+
+class "exam_app::services::api.dart::Api" {
+  {static} +String BASE_URL
+  {static} +Map<String, String> defaultHeaders
+  {static} -Dio _dio()
+  {static} +Future<dynamic> get()
+  {static} +Future<Response<dynamic>?> post()
+  {static} +Future<dynamic> put()
+}
+
+class "exam_app::services::auth.dart::Auth" {
+  {static} -FlutterSecureStorage _storage
+  {static} +Future<String?> getToken()
+  {static} +Future<void> setToken()
+  {static} +Future<void> removeToken()
+}
+
+"exam_app::services::auth.dart::Auth" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+
+class "exam_app::services::nfc_scanner.dart::NfcScanner" {
+  +String result
+  +Future<String> readNfcTag()
+  +Future<bool> IsNFCAvailable()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::services::nfc_scanner.dart::NfcScanner"
+
+class "exam_app::services::private_route.dart::PrivateRoute" {
+  +Widget next
+  +Widget build()
+}
+
+"exam_app::services::private_route.dart::PrivateRoute" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::services::private_route.dart::PrivateRoute"
+
+class "exam_app::viewmodels::department_view_model.dart::DepartmentViewModel" {
+  -Department? _department
+  +Department? department
+  +void setDepartment()
+  +Future<Department?> getDepartmentAsync()
+}
+
+"exam_app::viewmodels::department_view_model.dart::DepartmentViewModel" o-- "exam_app::models::department.dart::Department"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::viewmodels::department_view_model.dart::DepartmentViewModel"
+
+class "exam_app::viewmodels::holograms_view_model.dart::HologramsViewModel" {
+  -List<Hologram> _holograms
+  +List<Hologram> holograms
+  +void addHologram()
+  +Hologram? getHologram()
+}
+
+class "exam_app::viewmodels::medicine_view_model.dart::MedicineViewModel" {
+  -List<Medicine> _medicins
+  +List<Medicine> medicins
+  +Future<List<Medicine>> getMedicinsAsync()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::viewmodels::medicine_view_model.dart::MedicineViewModel"
+
+class "exam_app::viewmodels::patient_journal_view_model.dart::PatientJournalViewModel" {
+  -List<PatientJournal> _patientJournals
+  +List<PatientJournal> patientJournals
+  +Future<List<PatientJournal>> fetchPatientJournalsAsync()
+  +Future<PatientJournal?> createPatientJournalAsync()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::viewmodels::patient_journal_view_model.dart::PatientJournalViewModel"
+
+class "exam_app::viewmodels::patient_medicines_view_model.dart::PatientMedicinesViewModel" {
+  -List<PatientMedicine> _patientMedicines
+  +List<PatientMedicine> patientMedicines
+  +void setPatientMedicines()
+  +Future<List<PatientMedicine>> fetchPatientMedicinesAsync()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::viewmodels::patient_medicines_view_model.dart::PatientMedicinesViewModel"
+
+class "exam_app::viewmodels::patient_todo_view_model.dart::PatientTodoViewModel" {
+  -List<PatientTodo> _patientTodos
+  +List<PatientTodo> patientTodos
+  +void setPatientTodos()
+  +Future<List<PatientTodo>> fetchPatientTodosAsync()
+  +Future<List<PatientTodo>> updatePatientTodoAsync()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::viewmodels::patient_todo_view_model.dart::PatientTodoViewModel"
+
+class "exam_app::viewmodels::patient_view_model.dart::PatientViewModel" {
+  -Patient? _patient
+  +Patient? patient
+  +void setPatient()
+  +Future<Patient?> getPatientBySsnAsync()
+}
+
+"exam_app::viewmodels::patient_view_model.dart::PatientViewModel" o-- "exam_app::models::patient.dart::Patient"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::viewmodels::patient_view_model.dart::PatientViewModel"
+
+class "exam_app::viewmodels::user_view_model.dart::UserViewModel" {
+  -User? _user
+  +User? user
+  +void setUser()
+  +Future<User?> getUserAsync()
+}
+
+"exam_app::viewmodels::user_view_model.dart::UserViewModel" o-- "exam_app::models::user.dart::User"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "exam_app::viewmodels::user_view_model.dart::UserViewModel"
+
+class "exam_app::views::department_view.dart::DepartmentView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::department_view.dart::DepartmentView"
+
+class "exam_app::views::frontpage_view.dart::FrontpageView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::frontpage_view.dart::FrontpageView"
+
+class "exam_app::views::holograms_view.dart::HologramsView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::holograms_view.dart::HologramsView"
+
+class "exam_app::views::hologram_view.dart::HologramView" {
+  +Hologram hologram
+  +Widget build()
+}
+
+"exam_app::views::hologram_view.dart::HologramView" o-- "exam_app::models::hologram.dart::Hologram"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::hologram_view.dart::HologramView"
+
+class "exam_app::views::layout_view.dart::LayoutView" {
+  +Widget child
+  +Widget build()
+}
+
+"exam_app::views::layout_view.dart::LayoutView" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::layout_view.dart::LayoutView"
+
+class "exam_app::views::login.dart::LoginPage" {
+  +String? next
+  +State<LoginPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "exam_app::views::login.dart::LoginPage"
+
+class "exam_app::views::login.dart::_LoginPageState" {
+  -bool _showPassword
+  -void _clickShowPassword()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "exam_app::views::login.dart::_LoginPageState"
+
+class "exam_app::views::medicine_view.dart::MedicineView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::medicine_view.dart::MedicineView"
+
+class "exam_app::views::nfc_view.dart::NfcViewAnimation" {
+  +State<NfcViewAnimation> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "exam_app::views::nfc_view.dart::NfcViewAnimation"
+
+class "exam_app::views::nfc_view.dart::_NfcViewAnimationState" {
+  -AnimationController _controller
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"exam_app::views::nfc_view.dart::_NfcViewAnimationState" o-- "flutter::src::animation::animation_controller.dart::AnimationController"
+"flutter::src::widgets::framework.dart::State" <|-- "exam_app::views::nfc_view.dart::_NfcViewAnimationState"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "exam_app::views::nfc_view.dart::_NfcViewAnimationState"
+
+class "exam_app::views::patient_journal_view.dart::PatientJournalView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::patient_journal_view.dart::PatientJournalView"
+
+class "exam_app::views::patient_medicine_view.dart::PatientMedicineView" {
+  +int patientId
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::patient_medicine_view.dart::PatientMedicineView"
+
+class "exam_app::views::patient_todo_view.dart::PatientTodoView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::patient_todo_view.dart::PatientTodoView"
+
+class "exam_app::views::patient_view.dart::PatientView" {
+  +State<PatientView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "exam_app::views::patient_view.dart::PatientView"
+
+class "exam_app::views::patient_view.dart::_PatientViewState" {
+  -TabController _tabController
+  +void initState()
+  +Widget build()
+}
+
+"exam_app::views::patient_view.dart::_PatientViewState" o-- "flutter::src::material::tab_controller.dart::TabController"
+"flutter::src::widgets::framework.dart::State" <|-- "exam_app::views::patient_view.dart::_PatientViewState"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "exam_app::views::patient_view.dart::_PatientViewState"
+
+class "exam_app::views::qr_scan_view.dart::QrScanView" {
+  +State<QrScanView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "exam_app::views::qr_scan_view.dart::QrScanView"
+
+class "exam_app::views::qr_scan_view.dart::_QrScanViewState" {
+  +GlobalKey<State<StatefulWidget>> qrKey
+  +QRViewController? controller
+  +Barcode? result
+  +Stream<Barcode>? subscription
+  -void _onQRViewCreated()
+  +void dispose()
+  +Widget build()
+}
+
+"exam_app::views::qr_scan_view.dart::_QrScanViewState" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"exam_app::views::qr_scan_view.dart::_QrScanViewState" o-- "qr_code_scanner::src::qr_code_scanner.dart::QRViewController"
+"exam_app::views::qr_scan_view.dart::_QrScanViewState" o-- "qr_code_scanner::src::types::barcode.dart::Barcode"
+"exam_app::views::qr_scan_view.dart::_QrScanViewState" o-- "dart::async::Stream<Barcode>"
+"flutter::src::widgets::framework.dart::State" <|-- "exam_app::views::qr_scan_view.dart::_QrScanViewState"
+
+class "exam_app::views::scan_view.dart::ScanView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::scan_view.dart::ScanView"
+
+class "exam_app::views::settings_view.dart::SettingsView" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "exam_app::views::settings_view.dart::SettingsView"
+
+
+@enduml

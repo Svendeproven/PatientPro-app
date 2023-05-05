@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>437855736878-vtc917vjl5f89rnm86q3vqsaq3qlcr1p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.437855736878-vtc917vjl5f89rnm86q3vqsaq3qlcr1p</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCi7Rl1vlUL7gnrvRlWik79o9iwwbSyawM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>437855736878</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.examApp</string>
+	<key>PROJECT_ID</key>
+	<string>svendeproven-ee539</string>
+	<key>STORAGE_BUCKET</key>
+	<string>svendeproven-ee539.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:437855736878:ios:6b2584b9bed20912723bbf</string>
+</dict>
+</plist>

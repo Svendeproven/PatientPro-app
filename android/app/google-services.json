@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "437855736878",
+    "project_id": "svendeproven-ee539",
+    "storage_bucket": "svendeproven-ee539.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437855736878:android:906b52a5ba6c5ac4723bbf",
+        "android_client_info": {
+          "package_name": "com.example.exam_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437855736878-id1bmci3jlcpq4ce1pla6bcjp4qd5ncq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYI_YfhMbMB6jZjbWOrAZOiHYYEVO1Szg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437855736878-id1bmci3jlcpq4ce1pla6bcjp4qd5ncq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "437855736878-9gcfjc35k7lpojh1mk5dqsolgs26q801.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dk.svendeproven"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437855736878:android:69618e56da9d209c723bbf",
+        "android_client_info": {
+          "package_name": "dk.svendeproven"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437855736878-id1bmci3jlcpq4ce1pla6bcjp4qd5ncq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYI_YfhMbMB6jZjbWOrAZOiHYYEVO1Szg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437855736878-id1bmci3jlcpq4ce1pla6bcjp4qd5ncq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "437855736878-9gcfjc35k7lpojh1mk5dqsolgs26q801.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dk.svendeproven"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
